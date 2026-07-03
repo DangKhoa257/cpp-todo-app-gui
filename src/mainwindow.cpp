@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Version 3: load tasks from task.txt when the app starts
+    loadTasks();
     refreshUI();
 
     connect(ui->btnAdd, &QPushButton::clicked,
@@ -47,6 +49,7 @@ void MainWindow::onAddClicked()
     }
 
     addTask(name.toStdString());
+    saveTasks();
 
     ui->taskNameEdit->clear();
     refreshUI();
@@ -54,8 +57,6 @@ void MainWindow::onAddClicked()
 
 void MainWindow::onDeleteClicked()
 {
-    // The row selected in the list corresponds directly to the array index,
-    // since refreshUI() displays tasks[0..taskCount-1] in order.
     int index = ui->taskList->currentRow();
 
     if (index < 0)
@@ -65,6 +66,7 @@ void MainWindow::onDeleteClicked()
     }
 
     deleteTask(index);
+    saveTasks();
     refreshUI();
 }
 
@@ -79,5 +81,6 @@ void MainWindow::onCompleteClicked()
     }
 
     markDone(index);
+    saveTasks();
     refreshUI();
 }

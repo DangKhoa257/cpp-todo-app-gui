@@ -17,5 +17,7 @@ extern int taskCount;
 void addTask(const std::string& name);
 void deleteTask(int index);
 void markDone(int index);
+void saveTasks();
+void loadTasks();
 
 #endif // TASK_LOGIC_H
