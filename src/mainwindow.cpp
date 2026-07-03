@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "task_logic.h"
 
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnAdd, &QPushButton::clicked,
             this, &MainWindow::onAddClicked);
+    connect(ui->btnDelete, &QPushButton::clicked,
+            this, &MainWindow::onDeleteClicked);
+    connect(ui->btnComplete, &QPushButton::clicked,
+            this, &MainWindow::onCompleteClicked);
 }
 
 MainWindow::~MainWindow()
@@ -43,5 +49,35 @@ void MainWindow::onAddClicked()
     addTask(name.toStdString());
 
     ui->taskNameEdit->clear();
+    refreshUI();
+}
+
+void MainWindow::onDeleteClicked()
+{
+    // The row selected in the list corresponds directly to the array index,
+    // since refreshUI() displays tasks[0..taskCount-1] in order.
+    int index = ui->taskList->currentRow();
+
+    if (index < 0)
+    {
+        QMessageBox::information(this, "Todo App", "Hay chon mot task can xoa.");
+        return;
+    }
+
+    deleteTask(index);
+    refreshUI();
+}
+
+void MainWindow::onCompleteClicked()
+{
+    int index = ui->taskList->currentRow();
+
+    if (index < 0)
+    {
+        QMessageBox::information(this, "Todo App", "Hay chon mot task can hoan thanh.");
+        return;
+    }
+
+    markDone(index);
     refreshUI();
 }

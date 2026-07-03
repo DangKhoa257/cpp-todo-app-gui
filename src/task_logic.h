@@ -15,5 +15,7 @@ extern Task tasks[MAX_TASKS];
 extern int taskCount;
 
 void addTask(const std::string& name);
+void deleteTask(int index);
+void markDone(int index);
 
 #endif // TASK_LOGIC_H

@@ -14,3 +14,29 @@ void addTask(const std::string& name)
     tasks[taskCount].done = false;
     taskCount++;
 }
+
+void deleteTask(int index)
+{
+    if (index < 0 || index >= taskCount)
+    {
+        return;
+    }
+
+    // Shift all tasks after "index" one slot to the left
+    for (int i = index; i < taskCount - 1; i++)
+    {
+        tasks[i] = tasks[i + 1];
+    }
+
+    taskCount--;
+}
+
+void markDone(int index)
+{
+    if (index < 0 || index >= taskCount)
+    {
+        return;
+    }
+
+    tasks[index].done = true;
+}

@@ -19,6 +19,8 @@ public:
 
 private slots:
     void onAddClicked();
+    void onDeleteClicked();
+    void onCompleteClicked();
 
 private:
     void refreshUI();

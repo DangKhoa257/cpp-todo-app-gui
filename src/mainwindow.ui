@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Todo App - Version 1</string>
+   <string>Todo App - Version 2</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="mainLayout">
@@ -36,6 +36,25 @@
 
     <item>
      <widget class="QListWidget" name="taskList"/>
+    </item>
+
+    <item>
+     <layout class="QHBoxLayout" name="actionLayout">
+      <item>
+       <widget class="QPushButton" name="btnDelete">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnComplete">
+        <property name="text">
+         <string>Complete</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
 
    </layout>
