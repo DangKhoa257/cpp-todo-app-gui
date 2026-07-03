@@ -2,7 +2,11 @@
 #include "ui_mainwindow.h"
 #include "task_logic.h"
 
+#include <QColor>
+#include <QLineEdit>
+#include <QListWidgetItem>
 #include <QMessageBox>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,11 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Version 3: load tasks from task.txt when the app starts
     loadTasks();
     refreshUI();
 
     connect(ui->btnAdd, &QPushButton::clicked,
+            this, &MainWindow::onAddClicked);
+    connect(ui->taskNameEdit, &QLineEdit::returnPressed,
             this, &MainWindow::onAddClicked);
     connect(ui->btnDelete, &QPushButton::clicked,
             this, &MainWindow::onDeleteClicked);
@@ -33,10 +38,51 @@ void MainWindow::refreshUI()
 
     for (int i = 0; i < taskCount; i++)
     {
-        QString mark = tasks[i].done ? "[x] " : "[ ] ";
+        QString mark;
+        if (tasks[i].done)
+        {
+            mark = QString(QChar(0x2611)) + " ";
+        }
+        else
+        {
+            mark = QString(QChar(0x2610)) + " ";
+        }
+
         QString line = mark + QString::fromStdString(tasks[i].name);
-        ui->taskList->addItem(line);
+
+        QListWidgetItem *item = new QListWidgetItem(line);
+        if (tasks[i].done)
+        {
+            item->setForeground(QColor("#15803d"));
+        }
+        else
+        {
+            item->setForeground(QColor("#111827"));
+        }
+
+        ui->taskList->addItem(item);
     }
+
+    updateStatistics();
+}
+
+void MainWindow::updateStatistics()
+{
+    int doneCount = 0;
+
+    for (int i = 0; i < taskCount; i++)
+    {
+        if (tasks[i].done)
+        {
+            doneCount++;
+        }
+    }
+
+    int remainingCount = taskCount - doneCount;
+
+    ui->totalLabel->setText("Total: " + QString::number(taskCount));
+    ui->doneLabel->setText("Done: " + QString::number(doneCount));
+    ui->remainingLabel->setText("Remaining: " + QString::number(remainingCount));
 }
 
 void MainWindow::onAddClicked()
@@ -45,6 +91,9 @@ void MainWindow::onAddClicked()
 
     if (name.isEmpty())
     {
+        QMessageBox::warning(this, "Todo App",
+                             QString::fromUtf8("Vui l\303\262ng nh\341\272\255p t\303\252n c\303\264ng vi\341\273\207c!"));
+        ui->taskNameEdit->setFocus();
         return;
     }
 
@@ -52,6 +101,7 @@ void MainWindow::onAddClicked()
     saveTasks();
 
     ui->taskNameEdit->clear();
+    ui->taskNameEdit->setFocus();
     refreshUI();
 }
 

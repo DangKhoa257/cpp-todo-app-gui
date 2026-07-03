@@ -6,42 +6,253 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>500</height>
+    <width>560</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Todo App - Version 3</string>
+   <string>Todo App - Final</string>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #ffffff;
+    font-family: "Segoe UI";
+}
+
+#titleLabel {
+    color: #1f2937;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#subtitleLabel {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+#nameLabel {
+    color: #222222;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#totalLabel, #doneLabel, #remainingLabel {
+    color: #374151;
+    font-size: 14px;
+    padding: 4px 0;
+}
+
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 14px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #22c55e;
+}
+
+QListWidget {
+    background-color: #f5f7fa;
+    border: 1px solid #d9e1e8;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+}
+
+QListWidget::item {
+    padding: 8px;
+}
+
+QListWidget::item:selected {
+    background-color: #d8eaff;
+    color: #0d47a1;
+}
+
+QPushButton {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#btnAdd {
+    background-color: #22c55e;
+}
+
+#btnAdd:hover {
+    background-color: #16a34a;
+}
+
+#btnComplete {
+    background-color: #2563eb;
+}
+
+#btnComplete:hover {
+    background-color: #1d4ed8;
+}
+
+#btnDelete {
+    background-color: #ef4444;
+}
+
+#btnDelete:hover {
+    background-color: #dc2626;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="mainLayout">
-
+    <property name="leftMargin">
+     <number>24</number>
+    </property>
+    <property name="topMargin">
+     <number>24</number>
+    </property>
+    <property name="rightMargin">
+     <number>24</number>
+    </property>
+    <property name="bottomMargin">
+     <number>24</number>
+    </property>
+    <property name="spacing">
+     <number>14</number>
+    </property>
     <item>
-     <widget class="QLabel" name="nameLabel">
+     <widget class="QLabel" name="titleLabel">
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
       <property name="text">
-       <string>Ten cong viec</string>
+       <string>&#x1F4DD; Todo App</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="taskNameEdit"/>
+     <widget class="QLabel" name="subtitleLabel">
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="text">
+       <string>Manage your daily tasks</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="nameLabel">
+      <property name="text">
+       <string>T&#234;n c&#244;ng vi&#7879;c</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="taskNameEdit">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>42</height>
+       </size>
+      </property>
+      <property name="placeholderText">
+       <string>Nh&#7853;p c&#244;ng vi&#7879;c...</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QPushButton" name="btnAdd">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>42</height>
+       </size>
+      </property>
       <property name="text">
        <string>Add</string>
       </property>
      </widget>
     </item>
-
     <item>
-     <widget class="QListWidget" name="taskList"/>
+     <layout class="QHBoxLayout" name="statsLayout">
+      <property name="spacing">
+       <number>28</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="totalLabel">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="text">
+         <string>Total: 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="doneLabel">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="text">
+         <string>Done: 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="remainingLabel">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="text">
+         <string>Remaining: 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="statsSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </item>
-
+    <item>
+     <widget class="QListWidget" name="taskList">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>350</height>
+       </size>
+      </property>
+     </widget>
+    </item>
     <item>
      <layout class="QHBoxLayout" name="actionLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QPushButton" name="btnDelete">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>42</height>
+         </size>
+        </property>
         <property name="text">
          <string>Delete</string>
         </property>
@@ -49,6 +260,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="btnComplete">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>42</height>
+         </size>
+        </property>
         <property name="text">
          <string>Complete</string>
         </property>
@@ -56,7 +273,6 @@
       </item>
      </layout>
     </item>
-
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -64,7 +280,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
+     <width>560</width>
      <height>26</height>
     </rect>
    </property>

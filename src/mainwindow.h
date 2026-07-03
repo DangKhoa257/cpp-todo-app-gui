@@ -24,6 +24,7 @@ private slots:
 
 private:
     void refreshUI();
+    void updateStatistics();
 
     Ui::MainWindow *ui;
 };
