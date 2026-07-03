@@ -2,29 +2,18 @@
 #define TASK_LOGIC_H
 
 #include <string>
-#include <vector>
 
 struct Task
 {
-    int id;
-    std::string title;
-    std::string description;
-    bool completed;
+    std::string name;
+    bool done;
 };
 
-extern std::vector<Task> tasks;
+const int MAX_TASKS = 100;
 
-void loadTasks();
-void saveTasks();
+extern Task tasks[MAX_TASKS];
+extern int taskCount;
 
-void addTask(const std::string& title,
-             const std::string& description = "",
-             bool completed = false);
-bool deleteTask(int id);
-bool editTask(int id,
-              const std::string& title,
-              const std::string& description,
-              bool completed);
-std::vector<Task> searchTask(const std::string& keyword);
+void addTask(const std::string& name);
 
 #endif // TASK_LOGIC_H

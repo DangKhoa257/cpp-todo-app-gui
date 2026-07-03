@@ -11,6 +11,8 @@ qt_add_executable(TodoApp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    task_logic.cpp
+    task_logic.h
 )
 
 target_link_libraries(TodoApp
